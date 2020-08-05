@@ -22,10 +22,6 @@ def main():
         os.chdir(os.path.abspath(tutorials))
     else:
         os.chdir(os.path.abspath(projects))
-    # print(os.path.abspath(vs_code))
-    # subprocess.Popen([vs_code, os.getcwd()])
-    # print(chdir(path.abspath(projects)))
-    print()
     print('--------Current directory is:----------')
     print(os.getcwd())
     print()
@@ -39,17 +35,15 @@ def main():
     if len(filter_by_keyword) == 0:
         print('Didnt fount anything with that keyword')
     elif len(filter_by_keyword) == 1:
-        if openMark(keyword):
-            openPath = os.path.join(os.getcwd(), filter_by_keyword[0])
-            print(filter_by_keyword[0])
-            print(os.getcwd())
-            os.chdir(openPath)
-            print(openPath)
+        pathOfFolder = os.path.join(os.getcwd(), filter_by_keyword[0])
+        if openMark(keyword) or len(folders_in(pathOfFolder)) == 0:
+            os.chdir(pathOfFolder)
             subprocess.Popen([vs_code, os.getcwd()])
         else:
-            openPath = os.path.join(os.getcwd(), filter_by_keyword[0])
-            os.chdir(openPath)
-            subprocess.Popen([vs_code, os.getcwd()])
+            print(folders_in(pathOfFolder))
+            # openPath = os.path.join(os.getcwd(), filter_by_keyword[0])
+            # os.chdir(openPath)
+            # subprocess.Popen([vs_code, os.getcwd()])
     else:
         print('huh')
         items={}
@@ -61,5 +55,17 @@ def main():
             print()
     # print(os.listdir())
     # subprocess.Popen('explorer /select,{projects}')
+
+def folders_in(path_to_parent):
+    folders = []
+    exceptions = ['.git']
+    for fname in os.listdir(path_to_parent):
+        if os.path.isdir(os.path.join(path_to_parent,fname)):
+            if fname in exceptions:
+                continue
+            else:
+                folders.append(fname)
+    return folders
+
 
 main()
