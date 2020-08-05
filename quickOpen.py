@@ -41,10 +41,17 @@ def main():
     elif len(filter_by_keyword) == 1:
         if openMark(keyword):
             openPath = os.path.join(os.getcwd(), filter_by_keyword[0])
+            print(filter_by_keyword[0])
+            print(os.getcwd())
+            os.chdir(openPath)
+            print(openPath)
+            subprocess.Popen([vs_code, os.getcwd()])
+        else:
+            openPath = os.path.join(os.getcwd(), filter_by_keyword[0])
             os.chdir(openPath)
             subprocess.Popen([vs_code, os.getcwd()])
     else:
-        print()
+        print('huh')
         items={}
         for count, item in enumerate(filter_by_keyword):
             print(str(count)+': ' + item)
