@@ -40,19 +40,21 @@ def main():
             os.chdir(pathOfFolder)
             subprocess.Popen([vs_code, os.getcwd()])
         else:
-            print(folders_in(pathOfFolder))
+            for count, item in enumerate(folders_in(pathOfFolder)):
+                print(folders_in(pathOfFolder))
             # openPath = os.path.join(os.getcwd(), filter_by_keyword[0])
             # os.chdir(openPath)
             # subprocess.Popen([vs_code, os.getcwd()])
     else:
         print('huh')
-        items={}
-        for count, item in enumerate(filter_by_keyword):
-            print(str(count)+': ' + item)
-            items[count] = item
-        choice = input('Which one do you mean?:')
-        if choice in str(items.keys()):
-            print()
+        print(choices_items(filter_by_keyword))
+        # items={}
+        # for count, item in enumerate(filter_by_keyword):
+        #     print(str(count)+': ' + item)
+        #     items[count] = item
+        # choice = input('Which one do you mean?:')
+        # if choice in str(items.keys()):
+        #     print()
     # print(os.listdir())
     # subprocess.Popen('explorer /select,{projects}')
 
@@ -68,4 +70,17 @@ def folders_in(path_to_parent):
     return folders
 
 
+def choices_items(list_with_dir):
+    items={}
+    print(items)
+    for count, item in enumerate(list_with_dir):
+        print(str(count)+': ' + item)
+        items[count] = item
+    choice=False
+    while not choice:
+        user_input = input('Which one do you mean?:')
+        if choice in str(items.keys()):
+            choice = user_input
+    print(items[choice])
+    return items[choice]
 main()
