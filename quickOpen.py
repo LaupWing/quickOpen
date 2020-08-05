@@ -79,8 +79,7 @@ def choices_items(list_with_dir):
     choice=False
     while not choice:
         user_input = input('Which one do you mean?:')
-        if choice in str(items.keys()):
+        if user_input in str(items.keys()):
             choice = user_input
-    print(items[choice])
-    return items[choice]
+    return items[int(choice)]
 main()
